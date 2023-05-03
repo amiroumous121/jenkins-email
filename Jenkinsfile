@@ -96,5 +96,25 @@ pipeline {
                 attachLog: true
             )
         }
+post {
+    success {
+        script {
+            def emailAddress = 'hesi.zandiyeh@gmail.com'
+            def emailSubject = "Success: Security Scan - Pipeline '${env.JOB_NAME}' (${currentBuild.displayName})"
+            def emailBody = "Pipeline status: ${currentBuild.currentResult}"
+            println "Sending email to: ${emailAddress}"
+            println "Subject: ${emailSubject}"
+            println "Body: ${emailBody}"
+            emailext (
+                to: emailAddress,
+                subject: emailSubject,
+                body: emailBody,
+                mimeType: 'text/html',
+                attachLog: true
+            )
+        }
+    }
+    // ...
+}
     }
 }
