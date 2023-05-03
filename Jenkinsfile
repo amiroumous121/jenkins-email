@@ -49,7 +49,7 @@ pipeline {
     post {
         always {
             emailext (
-                to: 'azandieh@deakin.edu.au',
+                to: 'hesi.zandiyeh@gmail.com',
                 subject: "Pipeline '${env.JOB_NAME}' (${currentBuild.displayName})",
                 body: "Pipeline status: ${currentBuild.currentResult}",
                 mimeType: 'text/html',
