@@ -1,3 +1,6 @@
+
+
+
 pipeline {
     agent any
 
@@ -15,22 +18,38 @@ pipeline {
             }
             post {
                 success {
-                    emailext (
-                        to: 'hesi.zandiyeh@gmail.com',
-                        subject: "Success: Unit and Integration Tests - Pipeline '${env.JOB_NAME}' (${currentBuild.displayName})",
-                        body: "Pipeline status: ${currentBuild.currentResult}",
-                        mimeType: 'text/html',
-                        attachLog: true
-                    )
+                    script {
+                        def emailAddress = 'hesi.zandiyeh@gmail.com'
+                        def emailSubject = "Success: Unit and Integration Tests - Pipeline '${env.JOB_NAME}' (${currentBuild.displayName})"
+                        def emailBody = "Pipeline status: ${currentBuild.currentResult}"
+                        println "Sending email to: ${emailAddress}"
+                        println "Subject: ${emailSubject}"
+                        println "Body: ${emailBody}"
+                        emailext (
+                            to: emailAddress,
+                            subject: emailSubject,
+                            body: emailBody,
+                            mimeType: 'text/html',
+                            attachLog: true
+                        )
+                    }
                 }
                 failure {
-                    emailext (
-                        to: 'hesi.zandiyeh@gmail.com',
-                        subject: "Failure: Unit and Integration Tests - Pipeline '${env.JOB_NAME}' (${currentBuild.displayName})",
-                        body: "Pipeline status: ${currentBuild.currentResult}",
-                        mimeType: 'text/html',
-                        attachLog: true
-                    )
+                    script {
+                        def emailAddress = 'hesi.zandiyeh@gmail.com'
+                        def emailSubject = "Failure: Unit and Integration Tests - Pipeline '${env.JOB_NAME}' (${currentBuild.displayName})"
+                        def emailBody = "Pipeline status: ${currentBuild.currentResult}"
+                        println "Sending email to: ${emailAddress}"
+                        println "Subject: ${emailSubject}"
+                        println "Body: ${emailBody}"
+                        emailext (
+                            to: emailAddress,
+                            subject: emailSubject,
+                            body: emailBody,
+                            mimeType: 'text/html',
+                            attachLog: true
+                        )
+                    }
                 }
             }
         }
@@ -47,22 +66,40 @@ pipeline {
             }
             post {
                 success {
-                    emailext (
-                        to: 'hesi.zandiyeh@gmail.com',
-                        subject: "Success: Security Scan - Pipeline '${env.JOB_NAME}' (${currentBuild.displayName})",
-                        body: "Pipeline status: ${currentBuild.currentResult}",
-                        mimeType: 'text/html',
-                        attachLog: true
-                    )
+                    script {
+                        def emailAddress = 'hesi.zandiyeh@gmail.com'
+                        def emailSubject = "Success: Security Scan - Pipeline '${env.JOB_NAME}' (${currentBuild.displayName})"
+                        def emailBody = "Pipeline status: ${currentBuild.currentResult}"
+                        println "Sending email to: ${emailAddress}"
+                        println "Subject: ${emailSubject}"
+                        println "Body: ${emailBody}"
+                        emailext (
+                            to: emailAddress,
+                            subject: emailSubject,
+                            body: emailBody,
+                            mimeType: 'text/html',
+                            attachLog: true
+                        )
+                    }
                 }
                 failure {
-                    emailext (
-                        to: 'hesi.zandiyeh@gmail.com',
-                        subject: "Failure: Security Scan - Pipeline '${env.JOB_NAME}' (${currentBuild.displayName})",
-                        body: "Pipeline status: ${currentBuild.currentResult}",
-                        mimeType: 'text/html',
-                        attachLog: true
-                    )
+                    script {
+                        def emailAddress = 'hesi.zandiyeh@gmail.com'
+                        def emailSubject = "Failure: Security Scan - Pipeline '${env.JOB_NAME}' (${currentBuild.displayName})"
+                        def emailBody = "Pipeline status: ${currentBuild.currentResult}"
+                        println "Sending email to: ${emailAddress}"
+                        println "Subject: ${emailSubject}"
+
+
+println "Body: ${emailBody}"
+                        emailext (
+                            to: emailAddress,
+                            subject: emailSubject,
+                            body: emailBody,
+                            mimeType: 'text/html',
+                            attachLog: true
+                        )
+                    }
                 }
             }
         }
@@ -88,37 +125,23 @@ pipeline {
 
     post {
         always {
-            emailext (
-                to: 'hesi.zandiyeh@gmail.com',
-                subject: "Pipeline '${env.JOB_NAME}' (${currentBuild.displayName})",
-                body: "Pipeline status: ${currentBuild.currentResult}",
-                mimeType: 'text/html',
-                attachLog: true
-            )
-        }
-
-
-        
-        
-    }
-        
-post {
-    success {
-        script {
-            def emailAddress = 'hesi.zandiyeh@gmail.com'
-            def emailSubject = "Success: Security Scan - Pipeline '${env.JOB_NAME}' (${currentBuild.displayName})"
-            def emailBody = "Pipeline status: ${currentBuild.currentResult}"
-            println "Sending email to: ${emailAddress}"
-            println "Subject: ${emailSubject}"
-            println "Body: ${emailBody}"
-            emailext (
-                to: emailAddress,
-                subject: emailSubject,
-                body: emailBody,
-                mimeType: 'text/html',
-                attachLog: true
-            )
+            script {
+                def emailAddress = 'hesi.zandiyeh@gmail.com'
+                def emailSubject = "Pipeline '${env.JOB_NAME}' (${currentBuild.displayName})"
+                def emailBody = "Pipeline status: ${currentBuild.currentResult}"
+                println "Sending email to: ${emailAddress}"
+                println "Subject: ${emailSubject}"
+                println "Body: ${emailBody}"
+                emailext (
+                    to: emailAddress,
+                    subject: emailSubject,
+                    body: emailBody,
+                    mimeType: 'text/html',
+                    attachLog: true
+                )
+            }
         }
     }
-    // ...
 }
+
+
