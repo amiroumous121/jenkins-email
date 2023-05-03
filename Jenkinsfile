@@ -96,6 +96,12 @@ pipeline {
                 attachLog: true
             )
         }
+
+
+        
+        
+    }
+        
 post {
     success {
         script {
@@ -115,6 +121,4 @@ post {
         }
     }
     // ...
-}
-    }
 }
