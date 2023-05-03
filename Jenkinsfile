@@ -48,14 +48,13 @@ pipeline {
 
     post {
         always {
-            // Send notification emails after test and security scan stages
-            // You can adjust the "always" keyword to "success", "failure", or "unstable"
-            // depending on the desired notification condition
-            mail to: 'azandieh@deakin.edu.au',
-                 subject: "Pipeline '${env.JOB_NAME}' (${currentBuild.displayName})",
-                 body: "Pipeline status: ${currentBuild.currentResult}",
-                 mimeType: 'text/html',
-                 attachBuildLog: true
+            emailext (
+                to: 'azandieh@deakin.edu.au',
+                subject: "Pipeline '${env.JOB_NAME}' (${currentBuild.displayName})",
+                body: "Pipeline status: ${currentBuild.currentResult}",
+                mimeType: 'text/html',
+                attachLog: true
+            )
         }
     }
 }
