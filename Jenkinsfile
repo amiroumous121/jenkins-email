@@ -13,6 +13,26 @@ pipeline {
                 echo 'Running unit and integration tests...'
                 // Use test automation tools (e.g., JUnit, TestNG, or Mocha)
             }
+            post {
+                success {
+                    emailext (
+                        to: 'hesi.zandiyeh@gmail.com',
+                        subject: "Success: Unit and Integration Tests - Pipeline '${env.JOB_NAME}' (${currentBuild.displayName})",
+                        body: "Pipeline status: ${currentBuild.currentResult}",
+                        mimeType: 'text/html',
+                        attachLog: true
+                    )
+                }
+                failure {
+                    emailext (
+                        to: 'hesi.zandiyeh@gmail.com',
+                        subject: "Failure: Unit and Integration Tests - Pipeline '${env.JOB_NAME}' (${currentBuild.displayName})",
+                        body: "Pipeline status: ${currentBuild.currentResult}",
+                        mimeType: 'text/html',
+                        attachLog: true
+                    )
+                }
+            }
         }
         stage('Code Analysis') {
             steps {
@@ -24,6 +44,26 @@ pipeline {
             steps {
                 echo 'Starting security scan...'
                 // Perform security scan (e.g., OWASP Dependency-Check or Snyk)
+            }
+            post {
+                success {
+                    emailext (
+                        to: 'hesi.zandiyeh@gmail.com',
+                        subject: "Success: Security Scan - Pipeline '${env.JOB_NAME}' (${currentBuild.displayName})",
+                        body: "Pipeline status: ${currentBuild.currentResult}",
+                        mimeType: 'text/html',
+                        attachLog: true
+                    )
+                }
+                failure {
+                    emailext (
+                        to: 'hesi.zandiyeh@gmail.com',
+                        subject: "Failure: Security Scan - Pipeline '${env.JOB_NAME}' (${currentBuild.displayName})",
+                        body: "Pipeline status: ${currentBuild.currentResult}",
+                        mimeType: 'text/html',
+                        attachLog: true
+                    )
+                }
             }
         }
         stage('Deploy to Staging') {
